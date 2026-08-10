@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-do List</title>
+    <link rel="stylesheet" href="assets/Css/style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <div class="view-switcher" role="tablist" aria-label="Visões do painel">
+        <button type="button" class="view-button active" data-view="summary">Resumo</button>
+        <button type="button" class="view-button" data-view="tasks">Tarefas</button>
+      </div>
+
+      <section id="summaryView" class="view-panel">
+        <section class="card input-card">
+          <div class="topbar">
+            <h1>Gerenciador de demandas</h1>
+            <label class="theme-control" for="themeSelect">
+              <span>Tema</span>
+              <select id="themeSelect" class="theme-select">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+              </select>
+            </label>
+          </div>
+
+          <form id="taskForm" class="task-form">
+            <div class="form-grid">
+              <label class="field">
+                <span>Título da tarefa</span>
+                <input id="titleInput" class="task-input" type="text" maxlength="100" required />
+              </label>
+
+              <label class="field">
+                <span>Descrição</span>
+                <textarea id="descriptionInput" class="task-textarea" rows="3" maxlength="220" required></textarea>
+              </label>
+
+              <div class="field-row">
+                <label class="field">
+                  <span>Solicitante</span>
+                  <input id="requesterInput" class="task-input" type="text" maxlength="80" required />
+                </label>
+
+                <label class="field">
+                  <span>Executor</span>
+                  <input id="executorInput" class="task-input" type="text" maxlength="80" required />
+                </label>
+              </div>
+
+              <div class="field-row">
+                <label class="field">
+                  <span>Data de início</span>
+                  <input id="startDateInput" class="task-input" type="date" />
+                </label>
+
+                <label class="field">
+                  <span>Data prevista</span>
+                  <input id="dueDateInput" class="task-input" type="date" />
+                </label>
+              </div>
+
+              <label class="field">
+                <span>Status</span>
+                <select id="statusInput" class="task-input">
+                  <option value="a-fazer">A fazer</option>
+                  <option value="em-execucao">Em execução</option>
+                  <option value="concluida">Concluída</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Steps iniciais</span>
+                <div class="step-form step-form-inline">
+                  <input id="stepInput" class="step-input" type="text" maxlength="80" placeholder="Ex.: Definir escopo" />
+                  <button id="addStepButton" class="step-add-button" type="button">Adicionar step</button>
+                </div>
+                <ul id="initialStepsList" class="steps-list"></ul>
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button class="submit-button" type="submit">Adicionar tarefa</button>
+              <button id="cancelEditButton" class="secondary-button" type="button" hidden>Cancelar edição</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="card task-card">
+          <div class="board-head">
+            <div>
+              <strong id="taskCount">0 tarefas</strong>
+              <p class="board-subtitle">Resumo geral das demandas cadastradas.</p>
+            </div>
+
+            <div class="board-summary">
+              <div class="progress-chart" id="progressChart">
+                <span id="progressPercent">0%</span>
+              </div>
+
+              <div class="summary-metrics">
+                <div>
+                  <strong id="completedCount">0</strong>
+                  <small>concluídas</small>
+                </div>
+                <div>
+                  <strong id="pendingCount">0</strong>
+                  <small>pendentes</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section id="tasksView" class="view-panel is-hidden">
+        <section class="card task-card">
+          <div class="board-head">
+            <div>
+              <strong>Quadro de tarefas</strong>
+              <p class="board-subtitle">Organize as demandas por etapa.</p>
+            </div>
+          </div>
+
+          <div class="tab-bar" role="tablist" aria-label="Abas das tarefas">
+            <button type="button" class="tab-button active" data-status="em-execucao">Em execução</button>
+            <button type="button" class="tab-button" data-status="a-fazer">A fazer</button>
+            <button type="button" class="tab-button" data-status="concluida">Concluídas</button>
+          </div>
+
+          <div id="tasksContent" class="kanban-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="assets/Js/script.js"></script>
+  </body>
+</html>
